@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.MasaModel>
+
+@{
+    ViewBag.Title = "Masalar";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<style>
+    img {
+        height: 75px;
+        width: 75px;
+    }
+
+    button#btnMasa {
+        background-color:purple;
+        color: yellow;
+        height: 52px;
+        width: 110px;
+    }
+    label {
+        font-family: calibri;
+    }
+</style>
+
+<br/>
+
+<div class="wm-25">
+
+    @foreach (var item in Model)
+    {
+        <div id="birItem" style="border: groove 3px gray; margin: auto; width: 200px; float: left;">
+
+            <div style="background-color:purple;">
+                <center>
+                <label style="color: white;">Masa No: @item.MasaNo</label>
+                <br/>
+                <a href="@Url.Action("MasaDetay","Home",new {Id=item.MasaID})"><img src="https://www.carettaworkspace.com/upload/images/products/tables/dining_tables/loft_dining_table_ash/ash_wood_dining_room_table.png" /></a>
+                <br />
+                @{
+                    if (item.Statu == 1)
+                    {
+                        <label style="color: bisque;">Durum: <label style="color: red;">DOLU</label></label>
+                    }
+                    else
+                    {
+                        <label style="color: bisque;">Durum: <label style="color:lightgreen;">BOŞ</label></label>
+                    }
+                    <br/>
+                    if (item.GarsonIsmi != null)
+                    {
+                        <label style="color: bisque;">Garson : @item.GarsonIsmi</label>
+                    }
+                    else
+                    {
+                        <label style="color: bisque;">Garson : YOK</label>
+                    }
+                    <br/>
+                    if (item.Statu == 1)
+                    {
+                        <label style="color: cyan;">Toplam Tutar: @item.ToplamTutar TL</label>
+                    }
+                    else
+                    {
+                        <label style="color: cyan;">Toplam Tutar: 0 TL</label>
+                    }
+                }
+                </center>
+            </div>
+        </div>
+    }
+
+    </div>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.UrunModel>
+
+@{
+    ViewBag.Title = "Stok";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<script src="~/Scripts/stok.js"></script>
+<style>
+    img {
+        height: 75px;
+        width: 75px;
+    }
+
+    button#btnStok {
+        background-color: purple;
+        color: yellow;
+        height: 52px;
+        width: 110px;
+    }
+
+    label {
+        font-family: calibri;
+    }
+
+    td {
+        font-size: medium;
+    }
+</style>
+
+
+
+
+
+<button id="btnUrunList">Ürün Listesi <span id="spanList" class="glyphicon glyphicon-arrow-down"></span></button>
+<button id="btnUrunEkle">Ürün Ekle <span id="spanEkle" class="glyphicon glyphicon-arrow-down"></span></button>
+
+
+<div id="divStokDurumu" style="background-color: white;">
+
+    <center>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ürün Numarası</th>
+                    <th>Ürün Kategorisi</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Stok Durumu</th>
+                    <th>Güncelle/Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UrunId</td>
+                        <td>@item.CategoryName</td>
+                        <td><img src="@item.ResimYolu.Trim()" style="width: 50px; height: 50px;" alt="@item.Ad ın Resmi" /></td>
+                        <td>@item.Ad</td>
+                        <td style="color: darkred;">@item.Fiyat TL</td>
+                        <td>
+                            @{
+                                if (item.Stok == 0)
+                                {
+                                    <label>0 </label>
+                                    <label style="color: red;"> (YOK)</label>
+                                }
+                                else
+                                {
+                                    <label>@item.Stok </label>
+                                    <label style="color: green;"> (VAR)</label>
+                                }
+                            }
+                        </td>
+                        <td style="width: 125px;">
+                            <a href="@Url.Action("UrunEdit","Operation",new {Id=item.UrunId})"><button class="btn btn-info" style="width: 50px; height: 50px;"> <span class="glyphicon glyphicon-edit"></span></button></a>
+                            <a href="@Url.Action("UrunSil","Operation",new {Id=item.UrunId})"><button class="btn btn-danger" style="width: 50px; height: 50px;"> <span class="glyphicon glyphicon-remove"></span></button></a>
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </center>
+
+</div>
+
+<div id="divUrunEkleStok" style="background-color: white;">
+    <br /><br />
+    <center>
+        @using (Ajax.BeginForm("UrunKaydet", "Home", new AjaxOptions { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+        {
+            <label class="control-label">Ürün İsmi: </label> <input style="width:300px;" class="input-group" type="text" placeholder="Ürün İsmi" maxlength="20" name="Ad" required="required" />
+            <br />
+            <label class="control-label">Ürün Fiyatı (TL): </label> <input style="width:300px;" id="txtfiyat" class="input-group" type="number" min="1" max="2147483646" name="Fiyat" placeholder="Ürün Fiyatı" required="required" />
+            <br />
+            <label class="control-label">Mevcut Stok Adeti: </label> <input style="width:300px;" class="input-group" type="number" min="0" name="Stok" placeholder="Mevcut Stok" required="required" />
+            <br />
+            <label class="control-label">Kategori: </label> @Html.DropDownList("CategoryName")
+            <br />
+            <label class="control-label">İlgili Resim: </label> <input style="width:300px;" class="input-group" type="file" name="Resim" id="Resim" required="required" />
+            <br />
+            <button class="btn btn-info">Ürün Ekle <span class="glyphicon glyphicon-save"></span></button>
+        }
+    </center>
+    <br /><br />
+</div>

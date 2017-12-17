@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.SiparisModel>
+    
+<style>
+    label {
+        color: gray;
+    }
+
+</style>
+
+
+<div id="divFis" style="background-color: bisque; width: 800px;">
+    <br/>
+    <center>
+        <label style="font-size: 25px;">Adisyon Fişi</label>
+
+    <hr/>
+    <label>Tarih: </label> <label> <b> @DateTime.Now</b></label>
+    <br/>
+    <label>Masa No: </label> <label><b>@ViewBag.MasaNo</b></label>
+    <br/>
+    <label>Masa Kat: </label> <label><b>@ViewBag.MasaKat</b></label>
+    <br/>
+    <label>İlgili Garson: </label> <label><b>@ViewBag.GarsonAd</b></label>
+    <hr/>
+        <table class="table" style="border: groove 3px gray;">
+            <thead>
+            <tr>
+                <th>Ürün Ad</th>
+                <th>Fiyat</th>
+                <th>Adet</th>
+                <th>Toplam Tutar</th>
+                <th>Sipariş Zamanı</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UrunAD</td>
+                    <td>@item.UrunFiyat TL</td>
+                    <td>@item.Adet</td>
+                    <td style="color: darkred;">@item.Tutar TL</td>
+                    <td>@item.SiparisZamani</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <br />
+    <label>Masa Toplam Tutar: </label> <label style="color: darkred;"><b> @ViewBag.ToplamTutar TL</b></label>
+    <br/><br/>
+    </center>
+</div>
+
+<br/>
+<center>
+    <a href="@Url.Action("MasaKapat","Home",new {Id=ViewBag.MasaNo})"><button class="btn btn-danger" style="width: 300px; height: 90px; font-size: 20px;">Ödemeyi Onayla ve Masayı Kapat</button></a>
+</center>
+
+<br/><br/>
+
+
+
+
+
+
+
+

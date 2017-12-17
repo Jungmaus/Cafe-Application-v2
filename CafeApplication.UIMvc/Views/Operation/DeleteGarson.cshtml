@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "DeleteGarson";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<center>
+<h2 style="color: purple; background-color: white; margin-top: 30px;">@ViewBag.Garsonisim adlı garsonu silmek üzeresiniz. Gerçekten silmek istediğinizden emin misiniz ?</h2>
+</center>
+
+<br /><br/>
+
+<center>
+    <a href="@Url.Action("DeleteGarson","Operation")"><button class="btn btn-danger" style="font-size: 30px;width: 300px; height: 150px;">Evet Eminim <span class="glyphicon glyphicon-remove"></span></button></a>
+    <a href="@Url.Action("Garsonlar","Home")"><button class="btn btn-success" style="font-size: 30px;margin-left: 15px; width: 300px; height: 150px;">Bu Seferlik Affettim <span class="glyphicon glyphicon-backward"></span></button></a>
+</center>
+
+
+

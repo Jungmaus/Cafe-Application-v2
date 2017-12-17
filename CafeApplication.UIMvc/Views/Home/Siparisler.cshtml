@@ -1,0 +1,109 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.SiparisModel>
+
+
+@{
+    ViewBag.Title = "Siparisler";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<style>
+    img {
+        height: 75px;
+        width: 75px;
+    }
+
+    button#btnSiparis {
+        background-color: purple;
+        color: yellow;
+        height: 52px;
+        width: 110px;
+    }
+
+    label {
+        font-family: calibri;
+    }
+</style>
+
+
+
+<div style="background-color: white;">
+    @{
+        if (Model.FirstOrDefault() != null)
+        {
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Sipariş Numarası</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Adet</th>
+                    <th>Toplam Tutar</th>
+                    <th>Sipariş Zamanı</th>
+                    <th>İlgili Garson</th>
+                    <th>İlgili Masa Numarası</th>
+                    <th>Durum</th>
+                    <th>Teslim Durumu</th>
+                    <th>İptal Et</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td><img src="@item.UrunResmi.Trim()" alt="@item.UrunAD ın Resmi" style="width: 75px; height: 75px;"/></td>
+                        <td>@item.UrunAD</td>
+                        <td><label style="color: darkred;">@item.UrunFiyat TL</label></td>
+                        <td>@item.Adet</td>
+                        <td><label style="color: darkred; font-size: 20px;">@item.Tutar TL</label></td>
+                        <td>@item.SiparisZamani</td>
+                        <td>@item.GarsonIsmi</td>
+                        <td>@item.MasaID</td>
+                        <td>@{
+                                if (item.Durum == 1)
+                                {
+                                    <label style="color: green; font-size: 15px;">Teslim Edilmiş <span class="glyphicon glyphicon-heart"></span></label>
+                                }
+                                else
+                                {
+                                    <label style="color: red; font-size: 15px;">Teslim Edilmedi <span class="glyphicon glyphicon-alert"></span></label>
+                                }
+                            }</td>
+                        <td>@{
+                                if (item.Durum == 0)
+                                {
+                                    <a href="@Url.Action("SiparisTeslimEt", "Home", new {Id = item.Id})"><button class="btn btn-success" style="width: 130px;">Teslim Edildi mi? <span class="glyphicon-ok"></span></button></a>
+                                }
+                            }</td>
+                        <td>@{
+                                if (item.Durum == 0)
+                                {
+                                    <a href="@Url.Action("SiparisIptal", "Home", new {Id = item.Id})"><button class="btn btn-danger" style="width: 130px;">İptal Et <span class="glyphicon glyphicon-remove"></span></button></a>
+                                }
+                            }</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else
+        {<center>
+    <label style="font-size: 30px;">Herhangi bir sipariş bulunmamaktadır.</label>   
+         </center>
+    }}
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

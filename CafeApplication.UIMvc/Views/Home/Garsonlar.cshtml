@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CafeApplication.Entities.Concrate.Garsonlar>
+
+@{
+    ViewBag.Title = "Garsonlar";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<style>
+    img {
+        height: 75px;
+        width: 75px;
+    }
+
+    button#btnGarson {
+        background-color: purple;
+        color: yellow;
+        height: 52px;
+        width: 110px;
+    }
+
+    label {
+        font-family: calibri;
+    }
+</style>
+
+
+<h2 style="color: white;">Garsonlar ve Garson Durumu</h2>
+
+<br/>
+
+<button id="btnListe">Garson Listesi <span id="spanListe" class="glyphicon glyphicon-arrow-down"></span></button>
+<button id="btnGarsonEkle">Garson Ekle <span id="spanGarsonEkle" class="glyphicon glyphicon-arrow-up"></span></button>
+
+<br/>
+
+<div id="divGarsonListesi" style="background-color: white;">
+    
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Durum</th>
+            <th>Düzenle/Sil</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Kadi</td>
+                <td>@item.Ad</td>
+                <td>@item.Soyad</td>
+                <td>@{
+                        if (item.Statu == 1)
+                        {
+                            <label style="color: red;">MESGUL</label>
+                        }
+                        else
+                        {
+                            <label style="color: green;">MUSAIT</label>
+                        }
+                    }</td>
+                <td style="width: 125px;">
+                    <a href="@Url.Action("EditGarson","Operation",new {Id=item.Id})"><button class="btn btn-info" style="width: 50px; height: 50px;"> <span class="glyphicon glyphicon-edit"></span></button></a>
+                    <a href="@Url.Action("DeleteGarson","Operation",new {Id=item.Id})"><button class="btn btn-danger" style="width: 50px; height: 50px;"> <span class="glyphicon glyphicon-remove"></span></button></a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div id="divGarsonEkle" style="background-color: white">
+    <br/>
+    <center>
+    @using (Html.BeginForm("GarsonEkle", "Operation", FormMethod.Post))
+    {
+        <label>Kullanıcı Adı: </label> <input type="text" maxlength="20" name="Kadi" placeholder="Kullanıcı Adı" required/>
+        <br/><br/>
+        <label>Şifre: </label> <input type="text" name="Sifre" placeholder="Sifre" maxlength="20" required/>
+        <br/><br />
+        <label>Ad: </label> <input type="text" name="Ad" placeholder="Ad" maxlength="20" required/>
+        <br/><br />
+        <label>Soyad: </label> <input type="text" name="Soyad" placeholder="Soyad" maxlength="20" required/>
+        <br/><br />
+        <button style="width: 100px; height: 33px;" type="submit" class="btn btn-info">Kaydet <span class="glyphicon glyphicon-save"></span></button>
+    }
+    </center>
+<br/>
+
+</div>
+
+<script type="text/javascript">
+
+    var tikListe = 1;
+    var tikGarsonEkle = 1;
+
+    $("#divGarsonEkle").hide();
+
+    $("button#btnListe").click(function() {
+        tikListe++;
+        if (tikListe % 2 == 1) {
+            $("div#divGarsonListesi").show(1000);
+            $("span#spanListe").attr("class", "glyphicon glyphicon-arrow-down");
+        }else if (tikListe % 2 == 0) {
+            $("div#divGarsonListesi").hide(1000);
+            $("span#spanListe").attr("class", "glyphicon glyphicon-arrow-up");
+        }
+    });
+
+    $("button#btnGarsonEkle").click(function() {
+        tikGarsonEkle++;
+
+        if (tikGarsonEkle % 2 == 0) {
+            $("div#divGarsonEkle").show(1000);
+            $("span#spanGarsonEkle").attr("class", "glyphicon glyphicon-arrow-down");
+        } else if (tikGarsonEkle % 2 == 1) {
+            $("div#divGarsonEkle").hide(1000);
+            $("span#spanGarsonEkle").attr("class", "glyphicon glyphicon-arrow-up");
+        }
+
+    });
+
+</script>

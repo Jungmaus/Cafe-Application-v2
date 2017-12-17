@@ -1,0 +1,57 @@
+﻿@using System.Web.Mvc.Ajax
+@model CafeApplication.Entities.Concrate.Garsonlar
+
+@{
+    ViewBag.Title = "EditGarson";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<center>
+<div style="background-color: white;">
+    
+    <h2>@ViewBag.GarsonAd Adlı Garsonu Düzenliyorsunuz.</h2>
+    <br/>
+    
+    @using (Ajax.BeginForm("EditGarson", "Operation",FormMethod.Post,new AjaxOptions {HttpMethod = "POST"}))
+    {
+        <form style="border: groove 3px gray">
+            <br/>
+            <center>
+            <label>Kullanıcı Adı: </label> <input type="text" name="Kadi" maxlength="20" placeholder="Kullanıcı Adı" value="@Model.Kadi.Trim()"/>
+            <br/>
+            <label>Şifre: </label> <input type="text" name="Sifre" maxlength="20" placeholder="Şifre" value="@Model.Sifre.Trim()"/>
+            <br/>
+            <label>Ad: </label> <input type="text" name="Ad" maxlength="20" placeholder="Ad" value="@Model.Ad.Trim()"/>
+            <br/>
+            <label>Soyad: </label> <input type="text" name="Soyad" maxlength="20" placeholder="Soyad" value="@Model.Soyad.Trim()"/>
+            <br/>
+                <button type="submit" class="btn btn-info">Düzenle <span class="glyphicon glyphicon-edit"></span></button>
+               @{
+                   if (ViewBag.Msg != null)
+                   {
+                       <br/>
+                       if (ViewBag.Msg == "1")
+                       {
+                           <label style="color: green">İşleminiz başarılı bir şekilde tamamlanmıştır.</label>
+                       }
+                       else
+                       {
+                           <label style="color: red;">İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz.</label>
+                       }
+                   }
+               }
+            </center>
+        </form>
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+</div>
+</center>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cafe Application | Panel</title>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url("https://image.freepik.com/free-vector/decorative-background-with-a-purple-damask-pattern_1048-3458.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        button {
+            margin: auto;
+            border-style: none;
+            background-color: white;
+            color: black;
+            font-family: calibri;
+            height: 50px;
+            width: 110px;
+        }
+
+            button:hover {
+                background-color: purple;
+                color: yellow;
+                height: 60px;
+                width: 100px;
+            }
+            #btnCikis {
+                height: 40px;
+                width: 120px;
+                position: absolute;
+                margin-right: 5px;
+                font-size: 15px;
+            }
+            #btnCikis:hover {
+                
+            }
+    </style>
+</head>
+<body>
+    <br />
+    <a href="@Url.Action("CikisYap","Operation")"><button id="btnCikis" class="btn btn-danger"><span class="glyphicon glyphicon-backward"></span> Çıkış Yap</button></a>
+<div style="margin-top: 5px;">
+<center>
+    <a href="@Url.Action("Masalar", "Home")"><button id="btnMasa">Masa Listesi</button></a>
+    <a href="@Url.Action("Garsonlar", "Home")"><button id="btnGarson">Garson Listesi</button></a>
+    <a href="@Url.Action("Siparisler", "Home")"><button id="btnSiparis">Sipariş Listesi</button></a>
+    <a href="@Url.Action("Stok", "Home")"><button id="btnStok">Stok Durumu</button></a>
+</center>
+</div>
+
+    <br /><br />
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

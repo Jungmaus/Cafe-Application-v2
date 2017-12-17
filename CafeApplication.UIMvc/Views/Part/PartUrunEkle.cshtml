@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.SepetModel>
+
+
+<div id="divSepet" class="wm-25" style="float: right; position:inherit; background-color: brown; height: 900px; width: 25%;">
+    
+    <button id="btnHideSepet" class="btn-default" style="width: 30px; height: 30px; float: right;">X</button>
+
+    <center>
+        <h2 style="color: white;">SEPET</h2>
+        <hr/>
+    </center>    
+    
+    @foreach (var item in Model)
+    {
+        <div style="background-color: brown;">
+            <a href="@Url.Action("SepettenCikar","Home",new {Id=item.Id})"><button style="height: 22px; width: 20px; float: right; font-size:15px; background-color: black; color: white;">X</button></a>
+            <img src="@item.ResimYolu.Trim()" style="height: 50px; width: 50px;" alt="@item.UrunAd ın Resmi"/>
+            <label style="font-size: 20px; color: aqua;"> @item.UrunAd</label>
+            <p></p>
+            <br/>
+            <label style="color: bisque;">Adet: </label> <label style="color: white;">@item.UrunAdet</label>
+            <br/>
+            <label style="color: bisque;">Fiyat: </label><label style="color: white;">@item.UrunFiyat TL</label>
+            <br/>
+            <label style="color: bisque;">Tutar: </label><label style="color: white;">@item.Tutar TL</label>
+        </div>
+        <hr/>   
+    }
+    <center>@{
+                if (Model.FirstOrDefault() != null)
+                {
+                    <a href="@Url.Action("SepetiOnayla", "Home", new {Id = ViewBag.MasaID})"><button class="btn btn-success">Sepeti Onayla</button></a>
+                }
+            }
+    </center>
+</div>
+
+<br/>
+
+<div id="divUrunListesi" >
+   
+    @{ Html.RenderAction("UrunListesi", "Part"); }
+
+</div>
+
+
+<script type="text/javascript">
+    $("button#btnHideSepet").click(function() {
+        $("div#divSepet").hide();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

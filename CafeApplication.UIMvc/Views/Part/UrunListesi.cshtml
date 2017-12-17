@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.UrunModel>
+    
+
+
+<div id="divPartUrunList">
+    
+    @foreach (var item in Model)
+    {
+        <div id="birUrun" style="border: groove 3px yellow; background-color: gray; margin: auto; width: 200px; height: 215px;">
+            <center>
+                <img src="@item.ResimYolu.Trim()" style="width: 90px; height: 75px;" alt="@item.Ad ın Resmi"/>
+                <br />
+                <label style="color: crimson;">@item.Ad</label>
+                <br/>
+                @{
+                    if (item.Stok == 0 && item.Stok > -1 && item.Stok < 1)
+                    {
+                        <label style="color: antiquewhite;">Stok Durumu:</label> <label style="color:red;"> YOK</label>
+                    }
+                    else if (item.Stok > 0)
+                    {
+                        <label style="color: antiquewhite;">Stok Durumu:</label> <label style="color:green;"> VAR (@item.Stok)</label>
+                    }
+                }
+                <br />
+                <label style="color:antiquewhite">Fiyat:</label> <label style="color: red;"> @item.Fiyat TL</label>
+                <br/>
+                @using (Ajax.BeginForm("SepeteEkle", "Home",new {Id=item.UrunId},new AjaxOptions {HttpMethod = "POST"}))
+                {
+                    <input type="number" name="Adet" max="@item.Stok" min="0" placeholder="Adet"/>
+                    <button type="submit" class="btn-info" style="width: 100px; height: 30px;">Sepete Ekle</button>
+                }
+                <br/>
+            </center>
+        </div>
+    }
+
+</div>

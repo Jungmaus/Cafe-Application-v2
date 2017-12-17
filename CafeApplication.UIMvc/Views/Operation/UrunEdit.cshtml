@@ -1,0 +1,69 @@
+﻿@model CafeApplication.Entities.Concrate.Urunler
+
+@{
+    ViewBag.Title = "UrunEdit";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div style="background-color: white;">
+    
+    <h2> @Model.Ad isimli ürünü düzenliyorsunuz.</h2>
+    <br/><br/>
+    
+    @using (Html.BeginForm("UrunEdit", "Operation", FormMethod.Post))
+    {
+        <div id="formdiv">
+            <input id="UrunId" name="UrunId" value="@Model.Id" />
+            <label>Ürün Ad: </label> <input type="text" maxlength="20" name="Ad" placeholder="Ürün Adı" value="@Model.Ad.Trim()" required/>
+            <br/>
+            <label>Ürün Fiyatı (TL): </label> <input type="text" maxlength="20" name="Fiyat" placeholder="Ürün Fiyatı" value="@Model.Fiyat" required/>
+            <br/>
+            <label>Ürün Stok Durumu: </label> <input type="text" maxlength="20" name="Stok" placeholder="Ürün Stok Adeti" value="@Model.Stok" required/>
+            <br/>
+            <label>Kategori: </label> @Html.DropDownList("CategoryName")
+            <br/>
+            <label id="lblUrunResmi">Ürün Resmi: </label> <img id="urunimg" src="@Model.ResimYolu.Trim()" style="width: 50px; height: 50px;"/> <button type="button" class="btn btn-danger" id="btnKaldir">Kaldır</button>
+            <br/>
+            <button style="width: 110px; height: 40px;" class="btn btn-info" type="submit">Düzenle <span class="glyphicon glyphicon-edit"></span></button>
+        </div>
+    }
+    @{
+        if (ViewBag.Msg != null)
+        {
+            <br/>
+            if (ViewBag.Msg == "1")
+            {
+                <label style="color: green;">İşleminiz başarılı bir şekilde gerçekleştirilmiştir.</label>
+            }
+            else
+            {
+                <label style="color: red;">İşleminiz gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz.</label>
+            }
+        }
+    }
+
+
+
+
+    <script type="text/javascript">
+
+        $("input#UrunId").hide();
+
+        $("button#btnKaldir").click(function() {
+
+            $("img#urunimg").remove();
+            $("div#formdiv").append("<input id='file' name='file' type='file' />");
+            $(this).hide();
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+</div>

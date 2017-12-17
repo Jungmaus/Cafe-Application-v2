@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NusrETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Garsonlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kadi" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ad" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Soyad" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Statu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Masalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasaNo" Type="int" Nullable="false" />
+          <Property Name="Kat" Type="int" />
+          <Property Name="GarsonID" Type="int" />
+          <Property Name="Statu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasaID" Type="int" Nullable="false" />
+          <Property Name="UrunID" Type="int" Nullable="false" />
+          <Property Name="Adet" Type="int" Nullable="false" />
+          <Property Name="Tutar" Type="int" Nullable="false" />
+          <Property Name="GarsonID" Type="int" Nullable="false" />
+          <Property Name="Statu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasaID" Type="int" Nullable="false" />
+          <Property Name="UrunID" Type="int" Nullable="false" />
+          <Property Name="Adet" Type="int" Nullable="false" />
+          <Property Name="Tutar" Type="int" Nullable="false" />
+          <Property Name="SiparisZamani" Type="datetime" Nullable="false" />
+          <Property Name="GarsonID" Type="int" Nullable="false" />
+          <Property Name="Statu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fiyat" Type="int" Nullable="false" />
+          <Property Name="Stok" Type="int" Nullable="false" />
+          <Property Name="ResimYolu" Type="nvarchar(max)" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="NusrETModelStoreContainer">
+          <EntitySet Name="Garsonlar" EntityType="Self.Garsonlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masalar" EntityType="Self.Masalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NusrETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Garsonlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kadi" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Soyad" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Statu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Masalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasaNo" Type="Int32" Nullable="false" />
+          <Property Name="Kat" Type="Int32" />
+          <Property Name="GarsonID" Type="Int32" />
+          <Property Name="Statu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasaID" Type="Int32" Nullable="false" />
+          <Property Name="UrunID" Type="Int32" Nullable="false" />
+          <Property Name="Adet" Type="Int32" Nullable="false" />
+          <Property Name="Tutar" Type="Int32" Nullable="false" />
+          <Property Name="GarsonID" Type="Int32" Nullable="false" />
+          <Property Name="Statu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasaID" Type="Int32" Nullable="false" />
+          <Property Name="UrunID" Type="Int32" Nullable="false" />
+          <Property Name="Adet" Type="Int32" Nullable="false" />
+          <Property Name="Tutar" Type="Int32" Nullable="false" />
+          <Property Name="SiparisZamani" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GarsonID" Type="Int32" Nullable="false" />
+          <Property Name="Statu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fiyat" Type="Int32" Nullable="false" />
+          <Property Name="Stok" Type="Int32" Nullable="false" />
+          <Property Name="ResimYolu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="NusrETEntities5" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Garsonlar" EntityType="Self.Garsonlar" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+          <EntitySet Name="Masalar" EntityType="Self.Masalar" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NusrETModelStoreContainer" CdmEntityContainer="NusrETEntities5">
+          <EntitySetMapping Name="Garsonlar">
+            <EntityTypeMapping TypeName="NusrETModel.Garsonlar">
+              <MappingFragment StoreEntitySet="Garsonlar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kadi" ColumnName="Kadi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoriler">
+            <EntityTypeMapping TypeName="NusrETModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masalar">
+            <EntityTypeMapping TypeName="NusrETModel.Masalar">
+              <MappingFragment StoreEntitySet="Masalar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MasaNo" ColumnName="MasaNo" />
+                <ScalarProperty Name="Kat" ColumnName="Kat" />
+                <ScalarProperty Name="GarsonID" ColumnName="GarsonID" />
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sepet">
+            <EntityTypeMapping TypeName="NusrETModel.Sepet">
+              <MappingFragment StoreEntitySet="Sepet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="GarsonID" ColumnName="GarsonID" />
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparisler">
+            <EntityTypeMapping TypeName="NusrETModel.Siparisler">
+              <MappingFragment StoreEntitySet="Siparisler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="SiparisZamani" ColumnName="SiparisZamani" />
+                <ScalarProperty Name="GarsonID" ColumnName="GarsonID" />
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunler">
+            <EntityTypeMapping TypeName="NusrETModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="ResimYolu" ColumnName="ResimYolu" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

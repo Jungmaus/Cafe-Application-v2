@@ -1,0 +1,168 @@
+﻿@model IEnumerable<CafeApplication.UIMvc.Models.SiparisModel>
+
+@{
+    ViewBag.Title = "MasaDetay";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<h2 style="color: bisque;">Masa No: @ViewData["MasaID"]</h2>
+<br />
+
+<button id="btnSiparis">Sipariş Listesi <span id="spanSiparis" class="glyphicon glyphicon-arrow-up"></span></button>
+@{
+    if (ViewData["GarsonID"] != null)
+    {
+        <button id="btnGarson">Garson Detay<span id="spanGarson" class="glyphicon glyphicon-arrow-down"></span></button>
+    }
+    else
+    {
+        <button id="btnGarson">Garson Ekle<span id="spanGarson" class="glyphicon glyphicon-arrow-down"></span></button>
+    }
+    if (ViewData["GarsonID"] != null)
+    {
+        <button id="btnUrun">Ürün Ekle <span id="spanUrun" class="glyphicon glyphicon-arrow-down"></span></button>
+    }
+    if (Model.FirstOrDefault() != null)
+    {
+        <button id="btnMasa">Masa Kapat <span id="spanMasa" class="glyphicon glyphicon-arrow-down"></span></button>
+    }
+}
+
+<div id="divSiparis" style="background-color: white;">
+
+    <table class="table table-bordered" style="max-width: 100%; align-items: center;">
+        <thead>
+            <tr>
+                <th>Siparis Numarası</th>
+                <th>Ürün Resmi</th>
+                <th>Ürün Adı </th>
+                <th>Ürün Fiyatı </th>
+                <th>Ürün Adeti</th>
+                <th>İlgili Garson</th>
+                <th>Durum</th>
+                <th>Toplam Tutar</th>
+                <th>İptal Et ?</th>
+                <th>Teslim Edildi Mi ?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td><img style="height: 50px; width: 50px;" src="@item.UrunResmi.Trim()"/></td>
+                    <td>@item.UrunAD</td>
+                    <td>@item.UrunFiyat TL</td>
+                    <td>@item.Adet</td>
+                    <td>@item.GarsonIsmi</td>
+                    <td>
+                        @{
+                            if (item.Durum == 1)
+                            {
+                                <label style="color: green">Teslim Edildi</label>
+                            }
+                            else
+                            {
+                                <label style="color: red;">Teslim Edilmedi</label>
+                            }
+                        }
+                    </td>
+                    <td><label style="color: red;">@item.Tutar TL</label></td>
+                    <td>@{
+                            if (item.Durum != 1)
+                            {
+                                <center><a href="@Url.Action("SiparisIptal","Home",new {Id=item.Id})"><button style="height: 50px; width: 100px; font-size: 25px;" class="btn btn-danger">X</button></a></center>
+                            }
+                        }</td>
+                    <td>@{
+                            if (item.Durum == 0)
+                            {
+                                <center><a href="@Url.Action("SiparisTeslimEt","Home",new {Id=item.Id})"><button style="height: 50px; width: 150px; font-size: 15px;" class="btn btn-success">Teslim Edildi <span class="glyphicon glyphicon-ok"></span></button></a></center>
+                            }
+                        }</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div id="divGarson">
+
+    @{ Html.RenderAction("GarsonDetay", "Part");}
+
+</div>
+
+<div id="divUrunEkle">
+    @{ Html.RenderAction("PartUrunEkle", "Part"); }
+</div>
+
+
+<div id="divMasaKapat">
+    <br/>
+    <center>
+        @{ Html.RenderAction("MasaKapat", "Part"); }
+    </center>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    var tikSiparis = 0;
+    var tikGarson = 0;
+    var tikUrun = 0;
+    var tikMasa = 0;
+
+    $("div#divGarson").hide();
+    $("div#divUrunEkle").hide();
+    $("div#divMasaKapat").hide();
+
+    $("button#btnSiparis").click(function () {
+        tikSiparis++;
+        if (tikSiparis % 2 == 1) {
+            $("div#divSiparis").hide(1000);
+            $("span#spanSiparis").attr("class", "glyphicon glyphicon-arrow-down");
+        } else if (tikSiparis % 2 == 0) {
+            $("div#divSiparis").show(1000);
+            $("span#spanSiparis").attr("class", "glyphicon glyphicon-arrow-up");
+        }
+    });
+
+    $("button#btnGarson").click(function () {
+        tikGarson++;
+        if (tikGarson % 2 == 1) {
+            $("div#divGarson").show(1000);
+            $("span#spanGarson").attr("class", "glyphicon glyphicon-arrow-up");
+        } else if (tikGarson % 2 == 0) {
+            $("div#divGarson").hide(1000);
+            $("span#spanGarson").attr("class", "glyphicon glyphicon-arrow-down");
+        }
+    });
+
+    $("button#btnUrun").click(function () {
+        tikUrun++;
+        if (tikUrun % 2 == 1) {
+            $("div#divUrunEkle").show(1000);
+            $("span#spanUrun").attr("class", "glyphicon glyphicon-arrow-up");
+        } else if (tikUrun % 2 == 0) {
+            $("div#divUrunEkle").hide(1000);
+            $("span#spanUrun").attr("class", "glyphicon glyphicon-arrow-down");
+        }
+    });
+
+    $("button#btnMasa").click(function() {
+        tikMasa++;
+        if (tikMasa % 2 == 1) {
+            $("div#divMasaKapat").show(1000);
+            $("span#spanMasa").attr("class", "glyphicon glyphicon-arrow-up");
+        } else if (tikMasa % 2 == 0) {
+            $("div#divMasaKapat").hide(1000);
+            $("span#spanMasa").attr("class", "glyphicon glyphicon-arrow-down");
+        }
+    });
+
+
+</script>

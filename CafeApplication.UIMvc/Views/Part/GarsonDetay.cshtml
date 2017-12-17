@@ -1,0 +1,36 @@
+﻿@model CafeApplication.Entities.Concrate.Garsonlar
+    
+<style>
+    label {
+        color: black;
+    }
+
+</style>
+<div style="background-color: white;">
+    <br />
+    @{
+        if (Model != null)
+        {
+            <label>Garson No: <label style="color: red;">@Model.Id</label></label>
+            <br/>
+            <label>Garson İsim: <label style="color: red;">@Model.Ad @Model.Soyad</label></label>
+            <br/>
+            <label>Garson Kullanıcı Adı: <label style="color: red;">@Model.Kadi</label></label>
+            <br />
+            <a href="@Url.Action("GarsonKaldir","Home")"><button type="submit" style="margin-left: 15px;background-color: black; color: white; height: 40px; width: 150px;">Garson Kaldır</button></a>
+            <br/>
+        }
+        else
+        {
+            @Html.DropDownList("DataListGarson")
+            <br/>
+            using (Ajax.BeginForm("GarsonAta", "Home", new AjaxOptions { HttpMethod = "POST" }))
+            {
+                <label style="margin-left:15px;">Garson No: </label>
+                <input type="number" name="GarsonID" placeholder="Garson Numarası"/>
+                <button type="submit" style="background-color: black; color: white; height: 40px; width: 150px;">Garson Ata</button>
+            }
+        }
+    }
+    <br/>
+</div>
